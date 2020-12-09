@@ -51,17 +51,17 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const tileData = [
     {
-        img: '',
+        img: 'assets/images/serendipity1.jpg',
         title: 'Servicios',
         author: 'Author'
     },
     {
-        img: '',
+        img: 'assets/images/serendipity2.jpg',
         title: 'Servicios2',
         author: 'Author'
     },
     {
-        img: '',
+        img: 'assets/images/serendipity3.jpg',
         title: 'Servicios3',
         author: 'Author'
     }

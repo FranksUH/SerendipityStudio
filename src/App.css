@@ -1,9 +1,7 @@
 .App {
-  text-align: center;
-}
-
-.MuiTabs-flexContainer, .MuiTabs-fixed, .MuiTabs-scroller, .topNavBar{
-  background-color: black;
+  display: flex;
+  flex-direction: column;
+  min-height: min-content;
 }
 
 .PrivateTabIndicator-root-1.PrivateTabIndicator-colorSecondary-3.MuiTabs-indicator
@@ -12,39 +10,20 @@
   height: 2px;
 }
 
-.login-menu
-{ 
-  box-sizing: border-box;
-  position: relative;  
-  flex: 0 0 65.333%;
-  max-width: 65%;
-}
-
 li
 {
   list-style: none;
 }
 
-.align-rigth
-{  
-  justify-content: flex-end !important; 
-  box-sizing: border-box; 
-  display: flex;
-  flex-wrap: wrap; 
-  padding-left: 0%;
-}
-
-.MuiButtonBase-root.MuiButton-root.MuiButton-contained
+.footer
 {
-  box-sizing: border-box;
-  margin-top: 25%;
-  margin-bottom: 25%;
-  height: 50%;  
+  padding: 3;
+  margin-top: 'auto';
+  background-color: #8f9688;
 }
 
-.row
+.main
 {
-  box-sizing: border-box;
-  margin-top: 20px;
+  margin-top: 8px;
+  margin-bottom: 2px;
 }
-
