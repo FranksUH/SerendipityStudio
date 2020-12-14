@@ -1,12 +1,13 @@
 import React, { Component, Fragment } from 'react';
 import './App.css';
 import axios from 'axios';
-import SingleLineGridList from './Components/mainMenu/gridList';
 import SearchNavBar from './Components/nav/SearchNavBar';
 import { CssBaseline } from '@material-ui/core';
 import { Route } from 'react-router-dom';
 import { MainMenu } from './Components/mainMenu/MainMenu';
 import { Footer } from './Components/footer/Footer';
+import { OfferedServices } from './Components/offeredServices/OfferedServices';
+import { BookingForm } from './Components/booking/BookingForm';
 
 class App extends Component
 {
@@ -31,7 +32,8 @@ class App extends Component
 				<SearchNavBar/>
 				
 				<Route exact path = '/' component={MainMenu} />
-				<Route path='/grid' component={SingleLineGridList}/>
+				<Route path='/grid' component={OfferedServices}/>
+				<Route path='/booking' component={BookingForm}/>
 				
 				<Footer title='Serendipity Studio' description='We are pleased with your visit'/>
 			</Fragment>

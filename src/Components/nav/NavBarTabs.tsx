@@ -40,13 +40,15 @@ export const NavBarTabs = () => {
                     id="2"
                     icon={<ServicesIcon/>} 
                 />
-            </NavLink>               
+            </NavLink>
+            <NavLink to='/booking' style={{color:'inherit', textDecoration:'none' }}> 
             <Tab 
                 value="three" 
                 label="Booking" 
                 id="3"
                 icon={<ApplicationIcon/>} 
             />        
+            </NavLink> 
         </Tabs>
     )
 }

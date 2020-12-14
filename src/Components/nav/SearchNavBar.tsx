@@ -17,6 +17,9 @@ import useStyles from './DynamicStyles';
 import { EmojiFoodBeverageOutlined } from '@material-ui/icons';
 import ServicesIcon from '@material-ui/icons/Apps';
 import ApplicationIcon from '@material-ui/icons/CalendarToday';
+import { NavLink } from 'react-router-dom';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import SettingsIcon from '@material-ui/icons/Settings';
 
 export default function SearchNavBar() {
   const classes = useStyles();
@@ -55,8 +58,8 @@ export default function SearchNavBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Log out</MenuItem>
+      <MenuItem onClick={handleMenuClose}> <SettingsIcon style={{marginRight: '8px'}}/> Manage Profile</MenuItem>
+      <MenuItem onClick={handleMenuClose}> <ExitToAppIcon style={{marginRight: '8px'}}/> Log out</MenuItem>
     </Menu>
   );
 
@@ -70,14 +73,17 @@ export default function SearchNavBar() {
       open={mainMenuMobilAnchorEl !== null}
       onClose={()=> setMainMenuMobilAnchorEl(null)}
     >
-      <MenuItem onClick={()=>setMainMenuMobilAnchorEl(null)}>
-        <IconButton aria-label="Serendipity Ico" color="inherit">
-          <Badge badgeContent={0} color="secondary">
-            <EmojiFoodBeverageOutlined/>
-          </Badge>
-        </IconButton>
-        <p>Serendipity Studio</p>
-      </MenuItem>
+      <NavLink to='/' style={{color:'inherit', textDecoration:'none' }}> 
+        <MenuItem onClick={()=>setMainMenuMobilAnchorEl(null)}>
+          <IconButton aria-label="Serendipity Ico" color="inherit">
+            <Badge badgeContent={0} color="secondary">
+              <EmojiFoodBeverageOutlined/>
+            </Badge>
+          </IconButton>
+          <p>Serendipity Studio</p>
+        </MenuItem>
+      </NavLink>
+      <NavLink to='/grid' style={{color:'inherit', textDecoration:'none' }}> 
       <MenuItem onClick={()=>setMainMenuMobilAnchorEl(null)}>
         <IconButton aria-label="Services Ico" color="inherit">
           <Badge badgeContent={0} color="secondary">
@@ -86,6 +92,8 @@ export default function SearchNavBar() {
         </IconButton>
         <p>Services</p>
       </MenuItem>
+      </NavLink>
+      <NavLink to='/booking' style={{color:'inherit', textDecoration:'none' }}> 
       <MenuItem onClick={()=>setMainMenuMobilAnchorEl(null)}>
         <IconButton aria-label="Bookings Ico" color="inherit">
           <Badge badgeContent={0} color="secondary">
@@ -94,7 +102,8 @@ export default function SearchNavBar() {
         </IconButton>
         <p>Booking</p>
       </MenuItem>
-    </Menu>
+      </NavLink>
+    </Menu>    
   )
 
   const mobileMenuId = 'primary-search-account-menu-mobile';

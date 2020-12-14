@@ -2,15 +2,8 @@ import { makeStyles } from "@material-ui/core";
 
 export const menuStyles = makeStyles((theme) => ({
     mainFeaturedPost: {
-      position: 'relative',
-      backgroundColor: theme.palette.grey[800],
-      color: theme.palette.common.white,
-      marginBottom: theme.spacing(4),
-      backgroundImage: `url(assets/images/serendipity2.jpg)`,
-      backgroundSize: '100%',
-      backgroundRepeat: 'no-repeat',
-      backgroundPosition: 'center',
-      marginTop: '10px'
+      alignContent: 'center',
+      justifyContent: 'center'
     },
     overlay: {
       position: 'absolute',
