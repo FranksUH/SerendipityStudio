@@ -7,7 +7,7 @@ import { Route } from 'react-router-dom';
 import { MainMenu } from './Components/mainMenu/MainMenu';
 import { Footer } from './Components/footer/Footer';
 import { OfferedServices } from './Components/offeredServices/OfferedServices';
-import { BookingForm } from './Components/booking/BookingForm';
+import BookingForm from './Components/booking/BookingForm';
 
 class App extends Component
 {

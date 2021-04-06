@@ -3,8 +3,11 @@ import React, { useState } from 'react'
 import { services } from '../offeredServices/constantData'
 import {KeyboardDatePicker, MuiPickersUtilsProvider, KeyboardTimePicker} from '@material-ui/pickers'
 import DateFnsUtils from '@date-io/date-fns'
+import { connect } from 'react-redux'
+import { mapStateToProps } from './bookingMapperProps'
+import {IBookingProps} from './IBookingProps'
 
-export const BookingForm = () => {    
+const BookingForm: React.FC<IBookingProps> = (props: IBookingProps) => {    
 
     const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
     const [selectedServiceId, setSelectedServiceId] = useState('');
@@ -121,3 +124,5 @@ export const BookingForm = () => {
        </Grid>      
     )
 }
+
+export default connect(mapStateToProps)(BookingForm);
