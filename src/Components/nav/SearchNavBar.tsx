@@ -11,9 +11,9 @@ import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
-import styles from './NavBar.module.css';
+import styles from './StaticStyle.module.css';
 import { NavBarTabs } from './NavBarTabs';
-import useStyles from './DynamicStyles';
+import { searchBarStyles } from './ThemeStyles';
 import { EmojiFoodBeverageOutlined } from '@material-ui/icons';
 import ServicesIcon from '@material-ui/icons/Apps';
 import ApplicationIcon from '@material-ui/icons/CalendarToday';
@@ -22,7 +22,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import SettingsIcon from '@material-ui/icons/Settings';
 
 export default function SearchNavBar() {
-  const classes = useStyles();
+  const classes = searchBarStyles();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState<null | HTMLElement>(null);
   const [mainMenuMobilAnchorEl, setMainMenuMobilAnchorEl] = useState<null | HTMLElement>(null);

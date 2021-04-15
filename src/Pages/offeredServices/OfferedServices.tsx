@@ -11,7 +11,7 @@ export const OfferedServices = () => {
     return (
         <Grid container spacing={2} style={{margin:'20px'}}>
             {oferedServices.map((service: IServiceItem) => 
-                (<Grid item lg={4} md={6} xs={12}>
+                (<Grid item lg={4} md={6} xs={12} key={service.Id}>
                     <CardService {...service}/>
                 </Grid>)
             )}

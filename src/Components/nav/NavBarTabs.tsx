@@ -1,54 +1,40 @@
-import { createStyles, makeStyles, Tab, Tabs, Theme } from '@material-ui/core';
+import { Tab, Tabs } from '@material-ui/core';
 import React from 'react';
 import EmojiFoodBeverageOutlined from '@material-ui/icons/EmojiFoodBeverageOutlined';
 import ServicesIcon from '@material-ui/icons/Apps';
 import ApplicationIcon from '@material-ui/icons/CalendarToday';
-import { NavLink } from 'react-router-dom';
-
-const useStyles = makeStyles((theme: Theme) => createStyles({
-    hideable: {
-        display: 'none',
-        [theme.breakpoints.up('lg')]: {
-        display: 'block',
-        }
-    }
-}));
+import { useHistory } from 'react-router-dom';
+import APP_ROUTES from './../../routes';
+import { navBarStyles } from './ThemeStyles';
 
 export const NavBarTabs = () => {
-    const [value, setValue] = React.useState('one');
+    const [value, setValue] = React.useState(0);
+    const history = useHistory();
 
-    const handleChange = (event: React.ChangeEvent<{}>, newValue: string) => {
-        setValue(newValue);
+    const handleChange = (val:number, to: string) => {
+        setValue(val);
+        history.push(to);
     };
 
-    const styles = useStyles();
+    const styles = navBarStyles();
 
     return (
-        <Tabs className={styles.hideable} value={value} onChange={handleChange}>
-            <NavLink to='/' style={{color:'inherit', textDecoration:'none' }}> 
-                <Tab          
-                    value="one"
-                    label="Serendipity Studio"
-                    icon={<EmojiFoodBeverageOutlined/>}                
-                    id = "1"
-                />
-            </NavLink>        
-            <NavLink to='/grid' style={{color:'inherit', textDecoration:'none' }}> 
-                <Tab 
-                    value="two" 
-                    label="Services" 
-                    id="2"
-                    icon={<ServicesIcon/>} 
-                />
-            </NavLink>
-            <NavLink to='/booking' style={{color:'inherit', textDecoration:'none' }}> 
+        <Tabs className={styles.hideable} value={value}>
+            <Tab          
+                label="Serendipity Studio"
+                icon={<EmojiFoodBeverageOutlined/>}
+                onClick={() => handleChange(0, APP_ROUTES.homePage)}
+            />
             <Tab 
-                value="three" 
-                label="Booking" 
-                id="3"
+                label="Services"
+                icon={<ServicesIcon/>} 
+                onClick={() => handleChange(1, APP_ROUTES.servicesGrid)}
+            />
+            <Tab
+                label="Booking"
                 icon={<ApplicationIcon/>} 
+                onClick={() => handleChange(2, APP_ROUTES.book)}
             />        
-            </NavLink> 
         </Tabs>
     )
 }

@@ -1,6 +1,15 @@
 import { createStyles, fade, makeStyles, Theme } from "@material-ui/core";
 
-const useStyles = makeStyles((theme: Theme) =>
+export const navBarStyles = makeStyles((theme: Theme) => createStyles({
+  hideable: {
+      display: 'none',
+      [theme.breakpoints.up('lg')]: {
+      display: 'block',
+      }
+  }
+}));
+
+export const searchBarStyles = makeStyles((theme: Theme) =>
   createStyles({
     title: {
       display: 'none',
@@ -57,5 +66,3 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   }),
 );
-
-export default useStyles;

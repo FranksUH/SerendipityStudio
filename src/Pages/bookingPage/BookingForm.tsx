@@ -3,8 +3,6 @@ import React, { useState } from 'react'
 import { services } from '../offeredServices/constantData'
 import {KeyboardDatePicker, MuiPickersUtilsProvider, KeyboardTimePicker} from '@material-ui/pickers'
 import DateFnsUtils from '@date-io/date-fns'
-import { connect } from 'react-redux'
-import { mapStateToProps } from './bookingMapperProps'
 import {IBookingProps} from './IBookingProps'
 
 const BookingForm: React.FC<IBookingProps> = (props: IBookingProps) => {    
@@ -49,7 +47,7 @@ const BookingForm: React.FC<IBookingProps> = (props: IBookingProps) => {
                     </MenuItem>
                     {services.map(service => 
                         (
-                            <MenuItem value={service.Id}>
+                            <MenuItem value={service.Id} key={service.Id}>
                                 {service.Name}
                             </MenuItem>
                         ))}
@@ -125,4 +123,4 @@ const BookingForm: React.FC<IBookingProps> = (props: IBookingProps) => {
     )
 }
 
-export default connect(mapStateToProps)(BookingForm);
+export default BookingForm;
