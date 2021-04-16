@@ -3,9 +3,8 @@ import React, { useState } from 'react'
 import { services } from '../offeredServices/constantData'
 import {KeyboardDatePicker, MuiPickersUtilsProvider, KeyboardTimePicker} from '@material-ui/pickers'
 import DateFnsUtils from '@date-io/date-fns'
-import {IBookingProps} from './IBookingProps'
 
-const BookingForm: React.FC<IBookingProps> = (props: IBookingProps) => {    
+const BookingForm = () => {    
 
     const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
     const [selectedServiceId, setSelectedServiceId] = useState('');

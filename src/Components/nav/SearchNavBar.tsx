@@ -3,32 +3,22 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import InputBase from '@material-ui/core/InputBase';
-import Badge from '@material-ui/core/Badge';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import styles from './StaticStyle.module.css';
 import { NavBarTabs } from './NavBarTabs';
 import { searchBarStyles } from './ThemeStyles';
-import { EmojiFoodBeverageOutlined } from '@material-ui/icons';
-import ServicesIcon from '@material-ui/icons/Apps';
-import ApplicationIcon from '@material-ui/icons/CalendarToday';
-import { NavLink } from 'react-router-dom';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import SettingsIcon from '@material-ui/icons/Settings';
+import { ProfileMenu } from './ProfileMenu';
+import { NavBarMobilTabs } from './NavBarMobilTabs';
+import { ProfileMobilMenu } from './ProfileMobilMenu';
 
 export default function SearchNavBar() {
   const classes = searchBarStyles();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState<null | HTMLElement>(null);
   const [mainMenuMobilAnchorEl, setMainMenuMobilAnchorEl] = useState<null | HTMLElement>(null);
-
-  const isMenuOpen = Boolean(anchorEl);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -47,97 +37,9 @@ export default function SearchNavBar() {
     setMainMenuMobilAnchorEl(event.currentTarget);
   };
 
-  const menuId = 'primary-search-account-menu';
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}> <SettingsIcon style={{marginRight: '8px'}}/> Manage Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}> <ExitToAppIcon style={{marginRight: '8px'}}/> Log out</MenuItem>
-    </Menu>
-  );
-
-  const mainMenuIdMobileId = 'mainMenuIdMobileId';
-  const renderMainMenuMobile = (
-    <Menu
-      anchorEl={mainMenuMobilAnchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      id={mainMenuIdMobileId}
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-      open={mainMenuMobilAnchorEl !== null}
-      onClose={()=> setMainMenuMobilAnchorEl(null)}
-    >
-      <NavLink to='/' style={{color:'inherit', textDecoration:'none' }}> 
-        <MenuItem onClick={()=>setMainMenuMobilAnchorEl(null)}>
-          <IconButton aria-label="Serendipity Ico" color="inherit">
-            <Badge badgeContent={0} color="secondary">
-              <EmojiFoodBeverageOutlined/>
-            </Badge>
-          </IconButton>
-          <p>Serendipity Studio</p>
-        </MenuItem>
-      </NavLink>
-      <NavLink to='/grid' style={{color:'inherit', textDecoration:'none' }}> 
-      <MenuItem onClick={()=>setMainMenuMobilAnchorEl(null)}>
-        <IconButton aria-label="Services Ico" color="inherit">
-          <Badge badgeContent={0} color="secondary">
-            <ServicesIcon />
-          </Badge>
-        </IconButton>
-        <p>Services</p>
-      </MenuItem>
-      </NavLink>
-      <NavLink to='/booking' style={{color:'inherit', textDecoration:'none' }}> 
-      <MenuItem onClick={()=>setMainMenuMobilAnchorEl(null)}>
-        <IconButton aria-label="Bookings Ico" color="inherit">
-          <Badge badgeContent={0} color="secondary">
-            <ApplicationIcon />
-          </Badge>
-        </IconButton>
-        <p>Booking</p>
-      </MenuItem>
-      </NavLink>
-    </Menu>    
-  )
-
+  const profileMenuId = 'primary-search-account-menu';
+  const mobilTabsId = 'mainMenuIdMobileId';
   const mobileMenuId = 'primary-search-account-menu-mobile';
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-      open={isMobileMenuOpen}
-      onClose={()=> setMobileMoreAnchorEl(null)}
-    >
-      <MenuItem>
-        <IconButton aria-label="show 11 new notifications" color="inherit">
-          <Badge badgeContent={0} color="secondary">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <p>Profile</p>
-      </MenuItem>
-    </Menu>
-  );
 
   return (
     <div className={styles.NavBarColor}>
@@ -152,9 +54,7 @@ export default function SearchNavBar() {
           >
             <MenuIcon />
           </IconButton>
-          {/* <Typography className={classes.sectionMobile} variant="h6" noWrap>
-            Serendipity Studio
-          </Typography> */}
+          
           <NavBarTabs/>
 
           <div className={classes.search}>
@@ -162,7 +62,7 @@ export default function SearchNavBar() {
               <SearchIcon />
             </div>
             <InputBase
-              placeholder="Search…"
+              placeholder="Search service"
               classes={{
                 input: classes.inputInput
               }}
@@ -171,15 +71,11 @@ export default function SearchNavBar() {
           </div>
 
           <div className={classes.sectionDesktop}>
-            <IconButton aria-label="show 17 new notifications" color="inherit">
-              <Badge badgeContent={0} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
             <IconButton
+              key="profileButton"
               edge="end"
               aria-label="account of current user"
-              aria-controls={menuId}
+              aria-controls={profileMenuId}
               aria-haspopup="true"
               onClick={handleProfileMenuOpen}
               color="inherit"
@@ -189,6 +85,7 @@ export default function SearchNavBar() {
           </div>
           <div className={classes.sectionMobile}>
             <IconButton
+              key="showMoreIcon"
               aria-label="show more"
               aria-controls={mobileMenuId}
               aria-haspopup="true"
@@ -200,9 +97,25 @@ export default function SearchNavBar() {
           </div>          
         </Toolbar>
       </AppBar>
-      {renderMobileMenu}
-      {renderMenu}
-      {renderMainMenuMobile}
+      <ProfileMobilMenu
+        idElem={mobileMenuId}
+        anchorElem={mobileMoreAnchorEl}
+        closeHandler={()=> setMobileMoreAnchorEl(null)}
+        displayMenuHandler={handleProfileMenuOpen}
+        isOpen={Boolean(mobileMoreAnchorEl)}
+      />
+      <ProfileMenu 
+        idElem={profileMenuId} 
+        anchorElement={anchorEl} 
+        isOpen={Boolean(anchorEl)} 
+        handleClose={handleMenuClose}
+      />
+      <NavBarMobilTabs 
+        idElem={mobilTabsId} 
+        anchorElement={mainMenuMobilAnchorEl} 
+        isOpen={Boolean(mainMenuMobilAnchorEl)} 
+        onCloseHandler={()=> { setMainMenuMobilAnchorEl(null)}} 
+      />
     </div>
   );
 }
