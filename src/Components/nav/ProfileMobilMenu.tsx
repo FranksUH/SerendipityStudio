@@ -10,7 +10,7 @@ interface IProps {
     displayMenuHandler: (event: React.MouseEvent<HTMLElement>) => void;
 }
 
-export const ProfileMobilMenu = ({anchorElem, idElem, isOpen, closeHandler, displayMenuHandler}: IProps) => {
+const ProfileMobilMenu = ({anchorElem, idElem, isOpen, closeHandler, displayMenuHandler}: IProps) => {
     return (
     <Menu
       anchorEl={anchorElem}      
@@ -35,4 +35,4 @@ export const ProfileMobilMenu = ({anchorElem, idElem, isOpen, closeHandler, disp
     </Menu>
     )
 }
-
+export default ProfileMobilMenu;

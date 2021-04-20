@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -10,11 +10,14 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 import styles from './StaticStyle.module.css';
 import { NavBarTabs } from './NavBarTabs';
 import { searchBarStyles } from './ThemeStyles';
-import { ProfileMenu } from './ProfileMenu';
+import ProfileMenuConnector from './../../Containers/ProfileMenuConnector';
 import { NavBarMobilTabs } from './NavBarMobilTabs';
-import { ProfileMobilMenu } from './ProfileMobilMenu';
+import ProfileMobilMenu from './ProfileMobilMenu';
+import { Button } from '@material-ui/core';
 
-export default function SearchNavBar() {
+export default function HeaderNavBar(props: any) {
+  const { token, login, userName } = props;
+  console.log('token: ', token, Boolean(token));
   const classes = searchBarStyles();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState<null | HTMLElement>(null);
@@ -69,47 +72,70 @@ export default function SearchNavBar() {
               inputProps={{ 'aria-label': 'search' }}
             />
           </div>
+          
+          {token &&
+            <Fragment>
+              <div className={classes.sectionDesktop}>
+                <IconButton
+                  key="profileButton"
+                  edge="end"
+                  aria-label="account of current user"
+                  aria-controls={profileMenuId}
+                  aria-haspopup="true"
+                  onClick={handleProfileMenuOpen}
+                  color="inherit"
+                >
+                  <AccountCircle />
+                  <p style={{ fontSize:14, marginLeft:'5px' }}>                    
+                    {`Hello ${userName}`}
+                  </p>
+                </IconButton>
+              </div>
+              <div className={classes.sectionMobile}>
+                <IconButton
+                  key="showMoreIcon"
+                  aria-label="show more"
+                  aria-controls={mobileMenuId}
+                  aria-haspopup="true"
+                  onClick={handleMobileMenuOpen}
+                  color="inherit"
+                >
+                <MoreIcon />
+                </IconButton>
+              </div>
+            </Fragment>
+          }          
 
-          <div className={classes.sectionDesktop}>
-            <IconButton
-              key="profileButton"
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={profileMenuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
-          </div>
-          <div className={classes.sectionMobile}>
-            <IconButton
-              key="showMoreIcon"
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-            <MoreIcon />
-            </IconButton>
-          </div>          
+          {!token &&
+            <Fragment>
+              <Button variant='text' onClick={()=> login('frankie', '1234')} className={classes.labelButtom}>
+                Login
+              </Button>
+              <Button variant='text' className={classes.labelButtom}>
+                Sign up
+              </Button>
+            </Fragment>
+          }
         </Toolbar>
       </AppBar>
-      <ProfileMobilMenu
-        idElem={mobileMenuId}
-        anchorElem={mobileMoreAnchorEl}
-        closeHandler={()=> setMobileMoreAnchorEl(null)}
-        displayMenuHandler={handleProfileMenuOpen}
-        isOpen={Boolean(mobileMoreAnchorEl)}
-      />
-      <ProfileMenu 
-        idElem={profileMenuId} 
-        anchorElement={anchorEl} 
-        isOpen={Boolean(anchorEl)} 
-        handleClose={handleMenuClose}
-      />
+      {token &&
+        <div>
+           <ProfileMobilMenu
+            idElem={mobileMenuId}
+            anchorElem={mobileMoreAnchorEl}
+            closeHandler={()=> setMobileMoreAnchorEl(null)}
+            displayMenuHandler={handleProfileMenuOpen}
+            isOpen={Boolean(mobileMoreAnchorEl)}
+          />
+          <ProfileMenuConnector
+            idElem={profileMenuId} 
+            anchorElement={anchorEl} 
+            isOpen={Boolean(anchorEl)} 
+            handleClose={handleMenuClose}
+          />
+        </div>       
+      }
+      
       <NavBarMobilTabs 
         idElem={mobilTabsId} 
         anchorElement={mainMenuMobilAnchorEl} 

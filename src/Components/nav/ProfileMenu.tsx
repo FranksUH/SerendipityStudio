@@ -8,9 +8,18 @@ interface IProps {
     isOpen: boolean;
     handleClose: ()=>void;
     idElem: string;
+    logout?: ()=>void;
+    token?: string;
+    userName?: string;
 };
 
-export const ProfileMenu = ({anchorElement, isOpen, handleClose, idElem}: IProps) => {
+const ProfileMenu = ({anchorElement, isOpen, handleClose, idElem, logout, token, userName}: IProps) => {
+
+    const logoutUsr = () => {
+        logout && logout();
+        handleClose();
+    }
+
     return (
         <Menu
             anchorEl={anchorElement}
@@ -22,7 +31,8 @@ export const ProfileMenu = ({anchorElement, isOpen, handleClose, idElem}: IProps
             onClose={handleClose}
         >
             <MenuItem onClick={handleClose}> <SettingsIcon style={{marginRight: '8px'}}/> Manage Profile</MenuItem>
-            <MenuItem onClick={handleClose}> <ExitToAppIcon style={{marginRight: '8px'}}/> Log out</MenuItem>
+            <MenuItem onClick={logoutUsr}> <ExitToAppIcon style={{marginRight: '8px'}}/> Log out</MenuItem>
         </Menu>
     )
 };
+export default ProfileMenu;
