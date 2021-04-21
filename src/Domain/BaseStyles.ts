@@ -1,9 +1,18 @@
-export const Colors = {
-    black: 'black',
-    gray: 'rgb(172, 172, 179)',
-    background: 'white'
-};
+import { createMuiTheme } from "@material-ui/core/styles";
 
-export const Fonts = {
-    default: ''
-} 
+const theme = createMuiTheme({
+    palette: {
+      primary: {
+        main: "#0000000"
+      },      
+      secondary: {
+        main: "rgb(172, 172, 179)"
+      },
+      info: {
+        light: "rgb(172, 172, 179)",
+        main: "rgb(172, 172, 179)" //#7986cb
+      },
+      
+    }
+});
+export default theme;

@@ -14,6 +14,8 @@ import ProfileMenuConnector from './../../Containers/ProfileMenuConnector';
 import { NavBarMobilTabs } from './NavBarMobilTabs';
 import ProfileMobilMenu from './ProfileMobilMenu';
 import { Button } from '@material-ui/core';
+import { LoginFormData } from '../modals/Login';
+import LoginModal from '../modals/Login';
 
 export default function HeaderNavBar(props: any) {
   const { token, login, userName } = props;
@@ -22,6 +24,7 @@ export default function HeaderNavBar(props: any) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState<null | HTMLElement>(null);
   const [mainMenuMobilAnchorEl, setMainMenuMobilAnchorEl] = useState<null | HTMLElement>(null);
+  const [showModal, setShowModal] = useState(false);
 
   const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -38,6 +41,12 @@ export default function HeaderNavBar(props: any) {
 
   const handleMainMenuMobielOpen = (event: React.MouseEvent<HTMLElement>) => {
     setMainMenuMobilAnchorEl(event.currentTarget);
+  };
+
+  const handleLoginFormClose = (data: LoginFormData) => {    
+    console.log('data: ', data);
+    setShowModal(false);
+    login('frankie', '1234');
   };
 
   const profileMenuId = 'primary-search-account-menu';
@@ -108,10 +117,10 @@ export default function HeaderNavBar(props: any) {
 
           {!token &&
             <Fragment>
-              <Button variant='text' onClick={()=> login('frankie', '1234')} className={classes.labelButtom}>
+              <Button variant='text' onClick={()=> {setShowModal(true)}} color='secondary'>
                 Login
               </Button>
-              <Button variant='text' className={classes.labelButtom}>
+              <Button variant='text' color='secondary'>
                 Sign up
               </Button>
             </Fragment>
@@ -142,6 +151,7 @@ export default function HeaderNavBar(props: any) {
         isOpen={Boolean(mainMenuMobilAnchorEl)} 
         onCloseHandler={()=> { setMainMenuMobilAnchorEl(null)}} 
       />
+      <LoginModal visible={showModal} submitHandler={handleLoginFormClose} cancelHandler={()=>{ setShowModal(!showModal) }}/>
     </div>
   );
 }

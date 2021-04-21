@@ -1,5 +1,4 @@
 import { createStyles, fade, makeStyles, Theme } from "@material-ui/core";
-import { Colors } from './../../Domain/BaseStyles';
 
 export const navBarStyles = makeStyles((theme: Theme) => createStyles({
   hideable: {
@@ -66,7 +65,7 @@ export const searchBarStyles = makeStyles((theme: Theme) =>
       },
     },
     labelButtom: {
-      color: Colors.gray
+      color: theme.palette.secondary.main
     }
   }),
 );
